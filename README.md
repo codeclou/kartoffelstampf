@@ -5,10 +5,11 @@
 
 > Compress, Squash and Stampf your Images in a convenient way.
 
-<p>&nbsp;</p>
------
-
 [![](https://codeclou.github.io/doc/badges/generated/docker-image-size-19.svg)](https://hub.docker.com/r/codeclou/kartoffelstampf/tags/) [![](https://codeclou.github.io/doc/badges/generated/docker-from-alpine-3.5.svg)](https://alpinelinux.org/) [![](https://codeclou.github.io/doc/badges/generated/docker-run-as-non-root.svg)](https://docs.docker.com/engine/reference/builder/#/user)
+
+<p>&nbsp;</p>
+
+-----
  
 <p>&nbsp;</p>
 
