@@ -3,7 +3,7 @@
 
 <p>&nbsp;</p>
 
-Compress, Sqash and Stampf your images. 
+> Compress, Squash and Stampf your Images in a convenient way. 
 
 <p>&nbsp;</p>
 
@@ -16,6 +16,14 @@ Compress, Sqash and Stampf your images.
 
 [![](https://codeclou.github.io/kartoffelstampf/img/demo.gif)](https://github.com/codeclou/kartoffelstampf/)
 
+
+-----
+
+&nbsp;
+
+### Features
+
+ * Lossless PNG Compression by [optipng](https://de.wikipedia.org/wiki/OptiPNG)
 
 
 -----
@@ -44,7 +52,7 @@ docker run \
     codeclou/kartoffelstampf:latest
 ```
 
-Now go to http://localhost:9999 and start to stampf it. 
+Now go to [http://localhost:9999](http://localhost:9999) and start to stampf it. 
 
 
 
