@@ -1,0 +1,100 @@
+<file-status>
+    <!--
+    * Licensed under MIT License
+    * Copyright (c) 2017 Bernhard Grünewaldt
+    -->
+
+    <!-- HTML -->
+    <table class="file-status--table">
+        <tr if={ opts.files.length > 0 }>
+            <th class="file-status--tr-heading originalName">Filename</th>
+            <th class="file-status--tr-heading originalType">Filetype</th>
+            <th class="file-status--tr-heading status">Status</th>
+            <th class="file-status--tr-heading originalSize">Original</th>
+            <th class="file-status--tr-heading compressedSize">Compressed</th>
+            <th class="file-status--tr-heading saving">Saving</th>
+            <th class="file-status--tr-heading downloadUrl">Download</th>
+        </tr>
+        <tr each={ item, i in opts.files } class="file-status--column">
+            <td class="file-status--item originalName">
+                { item.originalName }
+            </td>
+            <td class="file-status--item originalType">
+                { item.originalType }
+            </td>
+            <td class="file-status--item status">
+                <status-indicator status={ item.status }></status-indicator>
+            </td>
+            <td class="file-status--item originalSize">
+                { this.renderFilesize(item.originalSize) }
+            </td>
+            <td class="file-status--item compressedSize">
+                { this.renderFilesize(item.compressedSize) }
+            </td>
+            <td class="file-status--item saving">
+                { this.saving(item.originalSize, item.compressedSize) }
+            </td>
+            <td class="file-status--item downloadUrl">
+                <a href={ item.downloadUrl } if={ item.downloadUrl }>
+                    download
+                </a>
+            </td>
+        </tr>
+    </table>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        var self = this;
+
+        renderFilesize(filesize) {
+            if (filesize === null) {
+                return '...';
+            }
+            return Math.round(filesize / 1000) + ' kb';
+        }
+
+        saving(originalSize, compressedSize) {
+            if (compressedSize === null) {
+                return '...';
+            }
+            return Math.round(compressedSize / originalSize  * 100) + ' %';
+        }
+    </script>
+
+    <!-- CSS -->
+    <style scoped>
+        .file-status--item {
+            flex-grow: 1;
+            padding:8px;
+            border-bottom: 1px solid #efefef;
+        }
+        .file-status--table {
+            width:100%;
+        }
+        .file-status--column {
+
+        }
+        .originalType {
+            width:50px;
+        }
+        .status {
+            width:50px;
+        }
+        .originalSize {
+            width:90px;
+        }
+        .compressedSize {
+            width:90px;
+        }
+        .saving {
+            width:90px;
+        }
+        .downloadUrl {
+            width:100px;
+        }
+        .file-status--tr-heading {
+            text-align: left;
+        }
+    </style>
+
+</file-status>

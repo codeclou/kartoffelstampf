@@ -1,0 +1,36 @@
+<status-indicator>
+    <!--
+    * Licensed under MIT License
+    * Copyright (c) 2017 Bernhard Grünewaldt
+    -->
+
+    <!-- HTML -->
+    <div>
+        <div if={ opts.status === 'uploaded' || opts.status === 'done' }>
+            <svg width="24" height="24" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+                <g fill="none" fill-rule="evenodd"><rect fill="#EFEFEF" width="512" height="512" rx="72"/><path fill="#02A300" d="M120.678 262.432l81.49 80.548L378.997 65l59.69 37.386-188.51 299.47L220.73 447l-52.99-45.143L73 314.08"/></g>
+            </svg>
+        </div>
+        <div if={ opts.status === 'compressing' }>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
+                <rect fill="#EFEFEF" width="512" height="512" rx="72" />
+                <g fill="none" fill-rule="evenodd">
+                    <animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 256 256" to="360 256 256" dur="4s" repeatCount="indefinite"/>
+                    <path d="M256 452c-108.248 0-196-87.752-196-196S147.752 60 256 60s196 87.752 196 196-87.752 196-196 196zm.5-56c77.044 0 139.5-62.456 139.5-139.5S333.544 117 256.5 117 117 179.456 117 256.5 179.456 396 256.5 396z" fill="#02A300" />
+                    <path fill="#EFEFEF" d="M204 60h105l-15.22 81h-74.085" />
+                </g>
+            </svg>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script>
+
+    </script>
+
+    <!-- CSS -->
+    <style scoped>
+
+    </style>
+
+</status-indicator>

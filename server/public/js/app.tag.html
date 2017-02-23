@@ -1,0 +1,85 @@
+<app>
+    <!--
+    * Licensed under MIT License
+    * Copyright (c) 2017 Bernhard Grünewaldt
+    -->
+
+    <!-- HTML -->
+    <div class="app--logo-wrapper">
+        <img class="app--logo" src="/img/logo-small.svg" />
+    </div>
+
+    <div class="dropzone" id="dropzonepng"></div>
+
+    <div class="app--files">
+        <file-status files={ items }></file-status>
+    </div>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        var self = this;
+        self.items = [];
+
+        addFile(file) {
+            self.items.push(file);
+            file.status = 'compressing';
+            self.update();
+            fetch('/compress/lossless-png/' + file.uploadName + '/' + encodeURIComponent(file.originalName))
+                .then(function(response) {
+                    return response.json()
+                }).then(function(json) {
+                    file.status = 'done';
+                    file.compressedSize = json.compressedSize;
+                    file.downloadUrl = json.downloadUrl;
+                    self.update();
+                }).catch(function(ex) {
+                    console.log('parsing failed', ex)
+                });
+        }
+
+        self.on('mount', function() {
+            var myDropzone = new Dropzone("#dropzonepng", {
+                url: "/upload",
+                acceptedFiles: 'image/png',
+                dictDefaultMessage: 'Drop your PNG files here for lossless compression'
+            });
+            myDropzone.on("success", function(file) {
+                var uploadResponse = JSON.parse(file.xhr.response);
+                myDropzone.removeFile(file);
+                self.addFile({
+                    originalName: file.name,
+                    originalType: file.type,
+                    originalSize: file.size,
+                    compressedSize: null,
+                    downloadUrl: null,
+                    uploadName: uploadResponse.filename,
+                    status: 'uploaded'
+                });
+            });
+        })
+    </script>
+
+    <!-- CSS -->
+    <style scoped>
+        .dropzone {
+            border: 2px dashed #02A300;
+            border-radius: 5px;
+            background: white;
+            margin:40px;
+        }
+        .app--logo-wrapper {
+            width:100%;
+            margin-top:60px;
+            margin-bottom:60px;
+            text-align: center;
+        }
+        .app--logo {
+            height:50px;
+            margin:auto;
+        }
+        .app--files {
+            margin:40px;
+        }
+    </style>
+
+</app>
