@@ -5,6 +5,9 @@
 
 > Compress, Squash and Stampf your Images in a convenient way. 
 
+Run: `docker run -i -t -p 9999:9999 codeclou/kartoffelstampf:latest`
+Open: [http://localhost:9999](http://localhost:9999)
+
 <p>&nbsp;</p>
 
 
