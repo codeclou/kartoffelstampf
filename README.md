@@ -3,10 +3,14 @@
 
 <p>&nbsp;</p>
 
-> Compress, Squash and Stampf your Images in a convenient way. 
+> Compress, Squash and Stampf your Images in a convenient way.
+ 
+<p>&nbsp;</p>
 
-Run: `docker run -i -t -p 9999:9999 codeclou/kartoffelstampf:latest`
-Open: [http://localhost:9999](http://localhost:9999)
+Quickstart
+
+ * `docker run -i -t -p 9999:9999 codeclou/kartoffelstampf:latest`
+ * [http://localhost:9999](http://localhost:9999)
 
 <p>&nbsp;</p>
 
