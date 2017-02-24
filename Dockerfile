@@ -16,6 +16,7 @@ RUN echo  >> /etc/apk/repositories && \
             pngquant@testing \
             imagemagick \
             optipng && \
+    mkdir -p /u/ && \
     mkdir -p /opt/npm/ && \
     mkdir -p /opt/node/ && \
     mkdir -p /opt/npm/uploads && \
@@ -23,7 +24,8 @@ RUN echo  >> /etc/apk/repositories && \
     addgroup -g 10777 nodeworker && \
     adduser -D -G nodeworker -u 10777 nodeworker && \
     chmod u+rx,g+rx,o+rx,a-w /opt/docker-entrypoint.sh && \
-    chown -R nodeworker:nodeworker /opt/npm
+    chown -R nodeworker:nodeworker /opt/npm && \
+    chown -R nodeworker:nodeworker /u
 
 #
 # INSTALL APP
@@ -36,7 +38,8 @@ RUN cd /opt/npm/app/ && \
 # WORKDIR
 #
 USER nodeworker
-VOLUME ["/opt/npm/"]
+EXPOSE 9999
+VOLUME ["/u"]
 ENTRYPOINT ["/opt/docker-entrypoint.sh"]
 WORKDIR /opt/npm/app/
 CMD ["npm", "start"]

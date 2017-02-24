@@ -114,3 +114,8 @@ git tag -a 1.0.0 -m "rel 1.0.0"
 git push origin 1.0.0
 ```
 
+----
+
+**Notices**
+
+ * optipng switched to stderr for all output .... hmm

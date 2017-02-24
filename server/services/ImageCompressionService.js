@@ -76,7 +76,7 @@ class ImageCompressionService {
                 if (!self.isOfAllowedMimeType(filePath)) throw new Error('filetype not allowed');
                 const mimeType = self._fileType(filePath);
                 if (self.isPng(mimeType)) {
-                    execResults.push(self.execCommand('pngquant', [ '--quality=65-80', '--ext _pngquant.png', filePath ]));
+                    execResults.push(self.execCommand('pngquant', [ '--quality=65-80', '--ext', '_pngquant.png', filePath ]));
                     execResults.push(self.execCommand('mv', [ KartoffelstampfConstants.uploadDir+'/'+filename+'_pngquant.png', KartoffelstampfConstants.uploadDir+'/'+filename ]));
                     execResults.push(self.execCommand('optipng', [ '-o5', filePath ]));
                 } else if (self.isJpg(mimeType)) {

@@ -6,61 +6,96 @@
 
     <!-- HTML -->
     <table class="file-status--table">
-        <tr if={ opts.files.length > 0 }>
-            <th class="file-status--tr-heading originalName">Filename</th>
-            <th class="file-status--tr-heading originalType">Filetype</th>
-            <th class="file-status--tr-heading status">Status</th>
-            <th class="file-status--tr-heading originalSize">Original</th>
-            <th class="file-status--tr-heading compressedSize">Compressed</th>
-            <th class="file-status--tr-heading saving">Saving</th>
-            <th class="file-status--tr-heading downloadUrl">Download</th>
-        </tr>
-        <tr each={ item, i in opts.files } class="file-status--column">
-            <td class="file-status--item originalName">
-                <img src={ item.thumbnailUri } />
-
-                { item.originalName }
-                <hr>
-                <div each={ execResult, j in item.execResults } class="file-status--exec-result">
-                    { execResult.command }
-                </div>
-            </td>
-            <td class="file-status--item originalType">
-                { item.originalType }
-            </td>
-            <td class="file-status--item status">
-                <status-indicator status={ item.status }></status-indicator>
-            </td>
-            <td class="file-status--item originalSize">
-                { this.renderFilesize(item.originalSize) }
-            </td>
-            <td class="file-status--item compressedSize">
-                { this.renderFilesize(item.compressedSize) }
-            </td>
-            <td class="file-status--item saving">
-                { this.saving(item.originalSize, item.compressedSize) }
-            </td>
-            <td class="file-status--item downloadUrl">
-                <a href={ item.downloadUrl } if={ item.downloadUrl }>
-                    download
-                </a>
-            </td>
-        </tr>
+        <thead>
+            <tr if={ opts.files.length > 0 }>
+                <th class="file-status--tr-heading thumbnail">Thumb</th>
+                <th class="file-status--tr-heading originalName">Filename</th>
+                <th class="file-status--tr-heading execResults">Shell</th>
+                <th class="file-status--tr-heading originalType">Filetype</th>
+                <th class="file-status--tr-heading status">Status</th>
+                <th class="file-status--tr-heading originalSize">Original</th>
+                <th class="file-status--tr-heading compressedSize">Compressed</th>
+                <th class="file-status--tr-heading saving">Saving</th>
+                <th class="file-status--tr-heading downloadUrl">Download</th>
+            </tr>
+        </thead>
+        <tbody each={ currentFile, i in opts.files }>
+            <tr>
+                <td rowspan="2" class="file-status--first-col-item file-status--border thumbnail">
+                    <img src={ currentFile.thumbnailUri } class="thumbnail-img"/>
+                </td>
+                <td class="file-status--first-col-item originalName">
+                    { currentFile.originalName }
+                </td>
+                <td class="file-status--first-col-item execResults">
+                    <a if={ currentFile.status === 'done' } onclick={ () => toggleShowExecResults(i) }>
+                        { showExecResults(i) === true ? 'hide' : 'show' }
+                    </a>
+                </td>
+                <td class="file-status--first-col-item originalType">
+                    { currentFile.originalType }
+                </td>
+                <td class="file-status--first-col-item status">
+                    <status-indicator status={ currentFile.status }></status-indicator>
+                </td>
+                <td class="file-status--first-col-item originalSize">
+                    { this.renderFilesize(currentFile.originalSize) }
+                </td>
+                <td class="file-status--first-col-item compressedSize">
+                    { this.renderFilesize(currentFile.compressedSize) }
+                </td>
+                <td class="file-status--first-col-item saving">
+                    { this.saving(currentFile.originalSize, currentFile.compressedSize) }
+                </td>
+                <td class="file-status--first-col-item downloadUrl">
+                    <a href={ currentFile.downloadUrl } if={ currentFile.downloadUrl }>
+                        download
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="8" class="file-status--border">
+                    <div class="file-status--exec-result-wrapper" if={ showExecResults(i) === true }>
+                        <div each={ execResult, j in currentFile.execResults } class="file-status--exec-result">
+                            { execResult.command }
+                            <div class="file-status--exec-stdout">
+                                <pre>{ execResult.stdout }</pre>
+                            </div>
+                            <div class="file-status--exec-stderr">
+                                <pre>{ execResult.stderr }</pre>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
     </table>
 
     <!-- JAVASCRIPT -->
     <script>
         var self = this;
+        self.showExecResult = [];
+
+        toggleShowExecResults(index) {
+            if (self.showExecResult[index] === undefined) {
+                self.showExecResult[index] = false;
+            }
+            self.showExecResult[index] = ! self.showExecResult[index];
+        }
+
+        showExecResults(index) {
+            return self.showExecResult[index] !== undefined && self.showExecResult[index] === true;
+        }
 
         renderFilesize(filesize) {
-            if (filesize === null) {
+            if (filesize === null || filesize === undefined || filesize === '') {
                 return '...';
             }
             return Math.round(filesize / 1000) + ' kb';
         }
 
         saving(originalSize, compressedSize) {
-            if (compressedSize === null) {
+            if (compressedSize === null || compressedSize === undefined || compressedSize === '') {
                 return '...';
             }
             return (100 - Math.round(compressedSize / originalSize  * 100)) + ' %';
@@ -69,10 +104,12 @@
 
     <!-- CSS -->
     <style scoped>
-        .file-status--item {
-            flex-grow: 1;
-            padding:8px;
+        .file-status--border  {
             border-bottom: 1px solid #efefef;
+            padding-bottom: 10px;
+        }
+        .file-status--table td {
+            vertical-align: top;
         }
         .file-status--table {
             width:100%;
@@ -80,11 +117,20 @@
         .file-status--column {
 
         }
+        .file-status--first-col-item {
+            padding-top:10px;
+        }
+        .thumbnail, .thumbnail-img {
+            width:60px;
+        }
+        .execResults {
+            width:60px;
+        }
         .originalType {
-            width:50px;
+            width:90px;
         }
         .status {
-            width:50px;
+            width:60px;
         }
         .originalSize {
             width:90px;
@@ -100,12 +146,25 @@
         }
         .file-status--tr-heading {
             text-align: left;
+            border-bottom: 1px solid #efefef;
         }
         .file-status--exec-result {
             background-color: #555;
             color:#fff;
             padding:5px;
             font-size:12px;
+        }
+        .file-status--exec-stdout {
+            padding-left:40px;
+            color: #03ec00;
+            overflow-x: auto;
+            max-width: calc(100vw - 20rem);
+        }
+        .file-status--exec-stderr {
+            padding-left:40px;
+            color: #ff3434;
+            overflow-x: auto;
+            max-width: calc(100vw - 20rem);
         }
     </style>
 

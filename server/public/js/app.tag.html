@@ -74,26 +74,27 @@
                 acceptedFiles: 'image/png,image/jpg,image/jpeg',
                 dictDefaultMessage: 'Drop your PNG or JPG files here for lossless compression'
             });
-            const file = {
-                thumbnailUri: null,
-                originalName: null,
-                originalType: null,
-                originalSize: null,
-                compressedSize: null,
-                downloadUrl: null,
-                execResults: [],
-                uploadName: null,
-                status: 'uploading'
-            };
-            myDropzone.on("success", function(file, uploadResponse) {
-                file.thumbnailUri = file.previewElement.children["0"].childNodes["0"].currentSrc;
-                file.originalName = file.name;
-                file.originalType = file.type;
-                file.originalSize = file.size;
+
+            myDropzone.on("success", function(dropzoneFile, uploadResponse) {
+                const file = {
+                    thumbnailUri: null,
+                    originalName: null,
+                    originalType: null,
+                    originalSize: null,
+                    compressedSize: null,
+                    downloadUrl: null,
+                    execResults: [],
+                    uploadName: null,
+                    status: 'uploading'
+                };
+                file.thumbnailUri = dropzoneFile.previewElement.children[0].childNodes[0].src;
+                file.originalName = dropzoneFile.name;
+                file.originalType = dropzoneFile.type;
+                file.originalSize = dropzoneFile.size;
                 file.uploadName = uploadResponse.filename;
                 file.status = 'uploaded';
                 self.addFile(file);
-                myDropzone.removeFile(file);
+                myDropzone.removeFile(dropzoneFile);
             });
 
         })

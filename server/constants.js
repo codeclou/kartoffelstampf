@@ -3,7 +3,7 @@
  * Copyright (c) 2017 Bernhard Grünewaldt
  */
 const KartoffelstampfConstants = {
-    uploadDir: '/opt/npm/uploads'
+    uploadDir: '/u'
 };
 
 module.exports = KartoffelstampfConstants;
