@@ -1,0 +1,28 @@
+<notification-bar>
+    <!--
+    * Licensed under MIT License
+    * Copyright (c) 2017 Bernhard Grünewaldt
+    -->
+
+    <!-- HTML -->
+    <ul>
+        <li each={ notification, i in opts.notifications } class="notification-bar--error">
+            <strong>{ notification.message }</strong><br>
+            { notification.details }
+        </li>
+    </ul>
+
+    <!-- JAVASCRIPT -->
+    <script>
+        var self = this;
+
+    </script>
+
+    <!-- CSS -->
+    <style scoped>
+        .notification-bar--error{
+            color:red;
+        }
+    </style>
+
+</notification-bar>

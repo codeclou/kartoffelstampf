@@ -9,6 +9,8 @@
         <img class="app--logo" src="/img/logo-small.svg" />
     </div>
 
+    <notification-bar notifications={ notifications }></notification-bar>
+
     <div class="dropzone" id="dropzonepng"></div>
 
     <div class="app--files">
@@ -19,22 +21,46 @@
     <script>
         var self = this;
         self.items = [];
+        self.notifications = [];
 
+        //
+        // FETCH HELPER METHODS
+        //
+        const fetchCheckStatus = (response) => {
+            if (response.status >= 200 && response.status < 300) {
+                return response
+            } else {
+                var error = new Error(response.statusText)
+                error.response = response;
+                throw error;
+            }
+        };
+        const fetchParseJson = (response) => response.json();
+        const fetchAddErrorToNotificationBar = (error) => {
+            error.response.json().then((jsonError) => {
+                console.log(jsonError);
+                self.notifications.push(jsonError);
+                self.update();
+            });
+        };
+
+        //
+        // COMPONENT METHODS
+        //
         addFile(file) {
             self.items.push(file);
             file.status = 'compressing';
             self.update();
             fetch('/compress/lossless-png/' + file.uploadName + '/' + encodeURIComponent(file.originalName))
-                .then(function(response) {
-                    return response.json()
-                }).then(function(json) {
+                .then(fetchCheckStatus)
+                .then(fetchParseJson)
+                .then((json) => {
                     file.status = 'done';
                     file.compressedSize = json.compressedSize;
                     file.downloadUrl = json.downloadUrl;
                     self.update();
-                }).catch(function(ex) {
-                    console.log('parsing failed', ex)
-                });
+                })
+                .catch(fetchAddErrorToNotificationBar);
         }
 
         self.on('mount', function() {

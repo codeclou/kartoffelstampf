@@ -2,11 +2,18 @@ FROM alpine:3.5
 
 COPY docker-entrypoint.sh /opt/docker-entrypoint.sh
 
-RUN apk add --no-cache \
+RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
+
+RUN echo  >> /etc/apk/repositories && \
+    apk add --no-cache \
             nodejs \
             bash \
             wget \
             gzip \
+            exiftool \
+            fbida-exiftran \
+            jpegoptim@testing \
+            imagemagick \
             optipng && \
     mkdir -p /opt/npm/ && \
     mkdir -p /opt/node/ && \

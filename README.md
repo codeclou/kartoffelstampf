@@ -73,4 +73,30 @@ Now go to [http://localhost:9999](http://localhost:9999) and start to stampf it.
 
  * [![](https://codeclou.github.io/doc/docker-warranty-notice.svg?v1)](https://github.com/codeclou/kartoffelstampf/blob/master/LICENSE.md)
  * Dockerfile and Image is provided under [MIT License](https://github.com/codeclou/kartoffelstampf/blob/master/LICENSE.md)
-  
+
+-----
+
+&nbsp;
+
+### Appendix
+
+
+#### Internal Documentation
+
+**Exif-Data Operations**
+
+ * Autorotate JPEG based on exif-data with [exiftran](http://manpages.ubuntu.com/manpages/zesty/man1/exiftran.1.html)
+  * `exiftran -ai foo.jpg`
+ * Remove all exif-data  
+  * `exiftran -di foo.jpg`
+
+**Lossless Compression**
+
+ * Lossless JPG compression with [jpegoptim](https://github.com/tjko/jpegoptim)
+  * `jpegoptim foo.jpg`
+ * Lossless PNG compression with [optipng](https://de.wikipedia.org/wiki/OptiPNG)
+  * `optipng -o2 foo.png`
+
+**Lossy Compression / Resizing**
+
+ * Resizing PNG+JPG with [ImageMagick](https://de.wikipedia.org/wiki/ImageMagick)
