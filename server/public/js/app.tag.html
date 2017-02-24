@@ -62,6 +62,7 @@
                     file.status = 'done';
                     file.compressedSize = json.compressedSize;
                     file.downloadUrl = json.downloadUrl;
+                    file.execResults =  json.execResults;
                     self.update();
                 })
                 .catch(fetchAddErrorToNotificationBar);
@@ -70,22 +71,31 @@
         self.on('mount', function() {
             var myDropzone = new Dropzone("#dropzonepng", {
                 url: "/upload",
-                acceptedFiles: 'image/png',
-                dictDefaultMessage: 'Drop your PNG files here for lossless compression'
+                acceptedFiles: 'image/png,image/jpg,image/jpeg',
+                dictDefaultMessage: 'Drop your PNG or JPG files here for lossless compression'
             });
-            myDropzone.on("success", function(file) {
-                var uploadResponse = JSON.parse(file.xhr.response);
+            const file = {
+                thumbnailUri: null,
+                originalName: null,
+                originalType: null,
+                originalSize: null,
+                compressedSize: null,
+                downloadUrl: null,
+                execResults: [],
+                uploadName: null,
+                status: 'uploading'
+            };
+            myDropzone.on("success", function(file, uploadResponse) {
+                file.thumbnailUri = file.previewElement.children["0"].childNodes["0"].currentSrc;
+                file.originalName = file.name;
+                file.originalType = file.type;
+                file.originalSize = file.size;
+                file.uploadName = uploadResponse.filename;
+                file.status = 'uploaded';
+                self.addFile(file);
                 myDropzone.removeFile(file);
-                self.addFile({
-                    originalName: file.name,
-                    originalType: file.type,
-                    originalSize: file.size,
-                    compressedSize: null,
-                    downloadUrl: null,
-                    uploadName: uploadResponse.filename,
-                    status: 'uploaded'
-                });
             });
+
         })
     </script>
 

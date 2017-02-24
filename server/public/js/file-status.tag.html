@@ -17,7 +17,13 @@
         </tr>
         <tr each={ item, i in opts.files } class="file-status--column">
             <td class="file-status--item originalName">
+                <img src={ item.thumbnailUri } />
+
                 { item.originalName }
+                <hr>
+                <div each={ execResult, j in item.execResults } class="file-status--exec-result">
+                    { execResult.command }
+                </div>
             </td>
             <td class="file-status--item originalType">
                 { item.originalType }
@@ -94,6 +100,12 @@
         }
         .file-status--tr-heading {
             text-align: left;
+        }
+        .file-status--exec-result {
+            background-color: #555;
+            color:#fff;
+            padding:5px;
+            font-size:12px;
         }
     </style>
 

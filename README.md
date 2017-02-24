@@ -99,6 +99,9 @@ Now go to [http://localhost:9999](http://localhost:9999) and start to stampf it.
 
  * Resizing PNG+JPG with [ImageMagick](https://de.wikipedia.org/wiki/ImageMagick)
 
+**SVG Compression**
+
+ * Clean SVG without Comments with [scour](https://github.com/scour-project/scour)
 
 ----
 
