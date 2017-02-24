@@ -13,6 +13,7 @@ RUN echo  >> /etc/apk/repositories && \
             exiftool \
             fbida-exiftran \
             jpegoptim@testing \
+            pngquant@testing \
             imagemagick \
             optipng && \
     mkdir -p /opt/npm/ && \

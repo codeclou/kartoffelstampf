@@ -26,11 +26,16 @@ class ImageCompressionService {
 
     _fileType(filePath) {
         const buffer = readChunk.sync(filePath, 0, 4100);
-        return fileType(buffer);
+        return fileType(buffer).mime;
     }
 
-    _isOfAllowedMimeType(mimeType) {
-        return 'image/png' || 'image/jpg';
+    _isOfAllowedMimeType(filePath) {
+        const mimeType = this._fileType(filePath);
+        return mimeType === 'image/png' || mimeType === 'image/jpg';
+    }
+
+    _isAllowedFilename(filename) {
+        return /^[a-zA-Z0-9]*$/.test(filename);
     }
 
     //
@@ -46,9 +51,13 @@ class ImageCompressionService {
     compressLossless(filename, originalFilenameEncoded) {
         const self = this;
         return new Promise((fulfill, reject) => {
-            const filePath = `${KartoffelstampfConstants.uploadDir}/${filename}`;
             try {
-                const stdout = execSync('optipng -o2 ' + filePath);
+                const filePath = `${KartoffelstampfConstants.uploadDir}/${filename}`;
+                if (!self._isAllowedFilename(filename)) throw new Error('filename not allowed');
+                if (!self._isOfAllowedMimeType(filePath)) throw new Error('filetype not allowed');
+                const pngquantCmd = execSync('pngquant --quality=65-80 --ext _pngquant.png ' + filePath);
+                const moveCmd = execSync('cd ' + KartoffelstampfConstants.uploadDir + ' && mv ' + filename + '_pngquant.png ' + filename);
+                const optipngCmd= execSync('optipng -o5 ' + filePath);
                 const fileStat = self._fileStat(filePath);
                 fulfill({
                     compressedSize: fileStat['size'],

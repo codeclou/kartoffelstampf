@@ -57,7 +57,7 @@
             if (compressedSize === null) {
                 return '...';
             }
-            return Math.round(compressedSize / originalSize  * 100) + ' %';
+            return (100 - Math.round(compressedSize / originalSize  * 100)) + ' %';
         }
     </script>
 

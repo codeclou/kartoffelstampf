@@ -47,7 +47,7 @@ router.get('/download/:filename/:originalFilenameEncoded', (req, res, next) => {
 //
 // LOSSLESS COMPRESSION ROUTE
 //
-router.get('/compress/lossless-png/:filename/:originalFilenameEncoded', (req, res, next) => {
+router.get('/compress/lossless/:filename/:originalFilenameEncoded', (req, res, next) => {
   const filename = req.params.filename;
   const originalFilenameEncoded = req.params.originalFilenameEncoded;
   res.setHeader('Content-Type', 'application/json');

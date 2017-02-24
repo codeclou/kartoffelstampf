@@ -51,7 +51,7 @@
             self.items.push(file);
             file.status = 'compressing';
             self.update();
-            fetch('/compress/lossless-png/' + file.uploadName + '/' + encodeURIComponent(file.originalName))
+            fetch('/compress/lossless/' + file.uploadName + '/' + encodeURIComponent(file.originalName))
                 .then(fetchCheckStatus)
                 .then(fetchParseJson)
                 .then((json) => {

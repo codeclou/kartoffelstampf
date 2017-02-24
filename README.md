@@ -94,8 +94,9 @@ Now go to [http://localhost:9999](http://localhost:9999) and start to stampf it.
 
  * Lossless JPG compression with [jpegoptim](https://github.com/tjko/jpegoptim)
   * `jpegoptim foo.jpg`
- * Lossless PNG compression with [optipng](https://de.wikipedia.org/wiki/OptiPNG)
-  * `optipng -o2 foo.png`
+ * Lossless PNG compression with [pngquant](https://pngquant.org/) and [optipng](https://de.wikipedia.org/wiki/OptiPNG)
+  * `pngquant --quality=65-80 --ext _pngquant.png foo.png`
+  * `optipng -o5 foo_pngquant.png`
 
 **Lossy Compression / Resizing**
 
