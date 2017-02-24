@@ -32,8 +32,8 @@
 
 ### Features
 
- * Lossless PNG Compression by [optipng](https://de.wikipedia.org/wiki/OptiPNG)
-
+ * Lossless PNG Compression powered by [pngquant](https://pngquant.org/) and [optipng](https://de.wikipedia.org/wiki/OptiPNG)
+ * Lossless JPG compression powered by [jpegoptim](https://github.com/tjko/jpegoptim)
 
 -----
 
