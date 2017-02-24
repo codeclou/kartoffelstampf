@@ -29,12 +29,12 @@ class ImageCompressionService {
         return fileType(buffer).mime;
     }
 
-    _isOfAllowedMimeType(filePath) {
+    isOfAllowedMimeType(filePath) {
         const mimeType = this._fileType(filePath);
         return mimeType === 'image/png' || mimeType === 'image/jpg';
     }
 
-    _isAllowedFilename(filename) {
+    isAllowedFilename(filename) {
         return /^[a-zA-Z0-9]*$/.test(filename);
     }
 
@@ -53,8 +53,8 @@ class ImageCompressionService {
         return new Promise((fulfill, reject) => {
             try {
                 const filePath = `${KartoffelstampfConstants.uploadDir}/${filename}`;
-                if (!self._isAllowedFilename(filename)) throw new Error('filename not allowed');
-                if (!self._isOfAllowedMimeType(filePath)) throw new Error('filetype not allowed');
+                if (!self.isAllowedFilename(filename)) throw new Error('filename not allowed');
+                if (!self.isOfAllowedMimeType(filePath)) throw new Error('filetype not allowed');
                 const pngquantCmd = execSync('pngquant --quality=65-80 --ext _pngquant.png ' + filePath);
                 const moveCmd = execSync('cd ' + KartoffelstampfConstants.uploadDir + ' && mv ' + filename + '_pngquant.png ' + filename);
                 const optipngCmd= execSync('optipng -o5 ' + filePath);

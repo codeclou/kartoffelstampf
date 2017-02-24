@@ -42,9 +42,14 @@ router.post('/upload', cpUpload, (req, res, next) => {
 //
 router.get('/download/:filename/:originalFilenameEncoded', (req, res, next) => {
   const filename = req.params.filename;
-  const originalFilename = decodeURIComponent(req.params.originalFilenameEncoded);
-  const filePath = `${KartoffelstampfConstants.uploadDir}/${filename}`;
-  res.download(filePath, originalFilename);
+  if (!imageCompressionService.isAllowedFilename(filename)) {
+    res.status(400);
+    res.send('THERE HAS BEEN A SAUERKRAUT PROBLEM! Filename only [a-zA-Z0-9]*');
+  } else {
+    const originalFilename = decodeURIComponent(req.params.originalFilenameEncoded);
+    const filePath = `${KartoffelstampfConstants.uploadDir}/${filename}`;
+    res.download(filePath, originalFilename);
+  }
 });
 
 //
