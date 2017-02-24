@@ -78,10 +78,7 @@ Now go to [http://localhost:9999](http://localhost:9999) and start to stampf it.
 
 &nbsp;
 
-### Appendix
-
-
-#### Internal Documentation
+### Appendix - Internal Documentation
 
 **Exif-Data Operations**
 
@@ -101,3 +98,16 @@ Now go to [http://localhost:9999](http://localhost:9999) and start to stampf it.
 **Lossy Compression / Resizing**
 
  * Resizing PNG+JPG with [ImageMagick](https://de.wikipedia.org/wiki/ImageMagick)
+
+
+----
+
+**Releasing and Tagging**
+
+Keep `server/package.json` version in sync. And do:
+
+```
+git tag -a 1.0.0 -m "rel 1.0.0"
+git push origin 1.0.0
+```
+
