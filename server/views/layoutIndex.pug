@@ -17,4 +17,4 @@ html
     script(src='/js/status-indicator.tag.html', type='riot/tag')
     script(src='/js/file-status.tag.html', type='riot/tag')
     script(src='/js/app.tag.html', type='riot/tag')
-    script riot.mount('*')
+    script riot.mount('*', { appVersion: '#{appVersion}' })

@@ -17,6 +17,10 @@
         <file-status files={ items }></file-status>
     </div>
 
+    <div class="app--footer">
+        version { opts.appVersion } - crafted with SAUERKRAUT
+    </div>
+
     <!-- JAVASCRIPT -->
     <script>
         var self = this;
@@ -105,6 +109,12 @@
         }
         .app--files {
             margin:40px;
+        }
+        .app--footer {
+            width:100%;
+            margin-top:300px;
+            text-align:center;
+            color: #ccc;
         }
     </style>
 
