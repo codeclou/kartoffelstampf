@@ -12,20 +12,14 @@ html
     link(rel='stylesheet', href='/npmjs/dropzone/dist/dropzone.css')
     link(rel='stylesheet', href='/3rdparty/webfont/source-sans-pro/font.css')
     link(rel='stylesheet', href='/css/main.css')
-    link(rel='stylesheet', id='felaStylesheet')
 
   body
     block content
     style(id='felaStyles')
-    script(src='/js/notification-bar.tag.html', type='riot/tag')
-    script(src='/js/status-indicator.tag.html', type='riot/tag')
-    script(src='/js/file-status.tag.html', type='riot/tag')
-    script(src='/js/app.tag.html', type='riot/tag')
+    script(src='/js/riot/notification-bar.tag.html', type='riot/tag')
+    script(src='/js/riot/status-indicator.tag.html', type='riot/tag')
+    script(src='/js/riot/file-status.tag.html', type='riot/tag')
+    script(src='/js/riot/app.tag.html', type='riot/tag')
     script.
-      'use strict';
-      const felaMixin = {
-        renderer: Fela.createRenderer(),
-        updateStyles: () => { document.getElementById('felaStyles').innerText = felaMixin.renderer.renderToString(); }
-      };
-      riot.mixin({ init: function() { this.opts.felaMixin = felaMixin; }});
-      riot.mount('*', { appVersion: '#{appVersion}' });
+      window.APP_VERSION = '#{appVersion}';
+    script(src='/js/init.riot.js', type='text/javascript')

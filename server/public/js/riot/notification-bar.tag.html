@@ -6,7 +6,7 @@
 
     <!-- HTML -->
     <ul>
-        <li each={ notification, i in opts.notifications } class={ classNameError }>
+        <li each={ notification, i in opts.notifications } class={ css.error }>
             <strong>{ notification.message }</strong><br>
             { notification.details }
         </li>
@@ -20,15 +20,6 @@
         //
         // METHODS
         //
-        styles() {
-            const error = props => ({
-                fontSize: props.size + 'px',
-                color: 'red'
-            });
-            self.classNameError = opts.felaMixin.renderer.renderRule(error, { size: self.size });
-            // lastly
-            opts.felaMixin.updateStyles();
-        }
 
         changeFont() {
             self.size = 30;
@@ -36,9 +27,27 @@
         }
 
         //
+        // STYLES
+        //
+
+        styles() {
+            const styleProps = opts.felaMixin.mergeWithGlobalStyleProps({
+                size: 10
+            });
+            const styles = {
+                error: props => ({
+                    fontSize: props.size + 'px',
+                    color: 'red'
+                }),
+            };
+            self.css = opts.felaMixin.renderAll(styles, styleProps);
+        }
+
+        //
         // INIT
         //
-        var self = this;
+        const self = this;
+        self.css = { };
         self.styles();
         self.size = 20;
     </script>

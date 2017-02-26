@@ -5,34 +5,24 @@
     -->
 
     <!-- HTML -->
-    <div class="app--logo-wrapper">
-        <img class="app--logo" src="/img/logo-small.svg" />
+    <div class={ css.logoWrapper }>
+        <img class={ css.logo } src="/img/logo-small.svg" />
     </div>
 
     <notification-bar notifications={ notifications }></notification-bar>
 
-    <div class="dropzone" id="dropzonepng"></div>
+    <div class={ 'dropzone ' + css.dropzone } id="dropzonepng"></div>
 
-    <div class="app--files">
+    <div class={ css.files }>
         <file-status files={ items }></file-status>
     </div>
 
-    <div class="app--footer">
+    <div class={ css.footer }>
         version { opts.appVersion } - crafted with SAUERKRAUT
     </div>
 
     <!-- JAVASCRIPT -->
     <script>
-        var self = this;
-        self.items = [];
-        self.notifications = [];
-        /*
-        self.notifications.push({
-            message: 'foo',
-            details: 'bar'
-        });
-        */
-
         //
         // FETCH HELPER METHODS
         //
@@ -55,7 +45,7 @@
         };
 
         //
-        // COMPONENT METHODS
+        // METHODS
         //
         addFile(file) {
             self.items.push(file);
@@ -74,13 +64,12 @@
                 .catch(fetchAddErrorToNotificationBar);
         }
 
-        self.on('mount', function() {
+        const onMount = () => {
             var myDropzone = new Dropzone("#dropzonepng", {
                 url: "/upload",
                 acceptedFiles: 'image/png,image/jpg,image/jpeg',
                 dictDefaultMessage: 'Drop your PNG or JPG files here for lossless compression'
             });
-
             myDropzone.on("success", function(dropzoneFile, uploadResponse) {
                 const file = {
                     thumbnailUri: null,
@@ -102,37 +91,54 @@
                 self.addFile(file);
                 myDropzone.removeFile(dropzoneFile);
             });
+        }
 
-        })
+        //
+        // STYLES
+        //
+        styles() {
+            const styleProps = opts.felaMixin.mergeWithGlobalStyleProps({
+                foo: 'red'
+            });
+            const styles = {
+                dropzone: props => ({
+                    border: '2px dashed ' + props.primaryColor,
+                    borderRadius: '5px',
+                    background: 'white',
+                    margin: '40px',
+                }),
+                logoWrapper: props => ({
+                    width: '100%',
+                    marginTop: '60px',
+                    marginBottom: '60px',
+                    textAlign: 'center',
+                }),
+                logo: props => ({
+                    height: '50px',
+                }),
+                files: props => ({
+                    margin: '40px',
+                }),
+                footer: props => ({
+                    width: '100%',
+                    marginTop: '300px',
+                    textAlign: 'center',
+                    color: '#ccc',
+                })
+            };
+            self.css = opts.felaMixin.renderAll(styles, styleProps);
+        }
+
+
+
+        //
+        // INIT
+        //
+        const self = this;
+        self.items = [];
+        self.notifications = [];
+        self.styles();
+        self.on('mount', onMount);
     </script>
-
-    <!-- CSS -->
-    <style scoped>
-        .dropzone {
-            border: 2px dashed #02A300;
-            border-radius: 5px;
-            background: white;
-            margin:40px;
-        }
-        .app--logo-wrapper {
-            width:100%;
-            margin-top:60px;
-            margin-bottom:60px;
-            text-align: center;
-        }
-        .app--logo {
-            height:50px;
-            margin:auto;
-        }
-        .app--files {
-            margin:40px;
-        }
-        .app--footer {
-            width:100%;
-            margin-top:300px;
-            text-align:center;
-            color: #ccc;
-        }
-    </style>
 
 </app>
