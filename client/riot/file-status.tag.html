@@ -73,28 +73,30 @@
 
     <!-- JAVASCRIPT -->
     <script>
-        var self = this;
+        const self = this;
+
+
         self.showExecResult = [];
 
-        toggleShowExecResults(index) {
+        self.toggleShowExecResults = (index) => {
             if (self.showExecResult[index] === undefined) {
                 self.showExecResult[index] = false;
             }
             self.showExecResult[index] = ! self.showExecResult[index];
         }
 
-        showExecResults(index) {
+        self.showExecResults = (index) => {
             return self.showExecResult[index] !== undefined && self.showExecResult[index] === true;
         }
 
-        renderFilesize(filesize) {
+        self.renderFilesize = (filesize) => {
             if (filesize === null || filesize === undefined || filesize === '') {
                 return '...';
             }
             return Math.round(filesize / 1000) + ' kb';
         }
 
-        saving(originalSize, compressedSize) {
+        self.saving = (originalSize, compressedSize) => {
             if (compressedSize === null || compressedSize === undefined || compressedSize === '') {
                 return '...';
             }

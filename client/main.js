@@ -1,7 +1,11 @@
-'use strict';
+import riot from 'riot'
+import { createRenderer } from 'fela'
+
+import './riot/app.tag.html'
+
 
 const felaMixin = {
-    renderer: Fela.createRenderer(),
+    renderer: createRenderer(),
     renderAll: function(rulesObj, propsObj) {
         const classes = Object.keys(rulesObj);
         const generatesClassnames = {};
@@ -20,5 +24,20 @@ const felaMixin = {
 felaMixin.renderer.subscribe(() => {
     document.getElementById('felaStyles').innerText = felaMixin.renderer.renderToString();
 });
-riot.mixin({ init: function() { this.opts.felaMixin = felaMixin; }});
+
+const busMixin = {
+    publish: (eventName, payload) => {
+        const event = document.createEvent("CustomEvent");
+        event.initCustomEvent(eventName, true, true, payload);
+        document.dispatchEvent(event);
+    },
+    subscribe: (eventName, subscribeCallback) => {
+        document.addEventListener(eventName, subscribeCallback, false);
+    },
+};
+
+riot.mixin({ init: function() {
+    this.opts.felaMixin = felaMixin;
+    this.opts.busMixin = busMixin;
+}});
 riot.mount('*', { appVersion: window.APP_VERSION });

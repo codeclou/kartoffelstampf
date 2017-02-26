@@ -1,0 +1,29 @@
+{
+  "name": "kartoffelstampf-client",
+  "description": "stampf it!",
+  "version": "1.1.1",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codeclou/kartoffelstampf.git"
+  },
+  "scripts": {
+    "build": "NODE_ENV=production webpack --config webpack/webpack.config.js"
+  },
+  "dependencies": {
+    "dropzone": "^4.3.0",
+    "fela": "^4.2.5",
+    "riot": "^3.3.1",
+    "whatwg-fetch": "^2.0.2"
+  },
+  "devDependencies": {
+    "babel": "6.5.2",
+    "babel-core": "6.22.1",
+    "babel-loader": "6.2.10",
+    "babel-preset-es2015-riot": "1.1.0",
+    "babel-preset-stage-2": "6.22.0",
+    "html-webpack-plugin": "2.25.0",
+    "riot-tag-loader": "1.0.0",
+    "webpack": "2.2.1"
+  }
+}

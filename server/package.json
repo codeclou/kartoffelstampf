@@ -1,5 +1,5 @@
 {
-  "name": "kartoffelstampf",
+  "name": "kartoffelstampf-server",
   "description": "stampf it!",
   "version": "1.1.1",
   "license": "MIT",
@@ -21,11 +21,5 @@
     "pug": "^2.0.0-beta11",
     "read-chunk": "^2.0.0",
     "serve-favicon": "~2.3.2"
-  },
-  "devDependencies": {
-    "dropzone": "^4.3.0",
-    "fela": "^4.2.5",
-    "riot": "^3.3.1",
-    "whatwg-fetch": "^2.0.2"
   }
 }

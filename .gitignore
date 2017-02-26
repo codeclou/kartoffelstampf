@@ -4,3 +4,5 @@ server/node_modules
 server/.npmbundle
 server/*.log
 server/uploads/
+client/node_modules
+client/*.log

@@ -17,11 +17,13 @@
 
     <!-- JAVASCRIPT -->
     <script>
+        const self = this;
+
         //
         // METHODS
         //
 
-        changeFont() {
+        self.changeFont = () => {
             self.size = 30;
             self.styles();
         }
@@ -30,7 +32,7 @@
         // STYLES
         //
 
-        styles() {
+        self.styles = () => {
             const styleProps = opts.felaMixin.mergeWithGlobalStyleProps({
                 size: 10
             });
@@ -46,7 +48,6 @@
         //
         // INIT
         //
-        const self = this;
         self.css = { };
         self.styles();
         self.size = 20;
