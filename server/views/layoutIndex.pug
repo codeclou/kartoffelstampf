@@ -5,16 +5,27 @@ html
     meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
     meta(http-equiv='x-ua-compatible', content='ie=edge')
     title='Kartoffelstampf'
-    script(src='/3rdparty/riot+compiler-3.3.1.min.js', type='text/javascript')
-    script(src='/3rdparty/dropzone-4.3.0.min.js', type='text/javascript')
-    script(src='/3rdparty/github-fetch-polyfill-2.0.2.js', type='text/javascript')
-    link(rel='stylesheet', href='/3rdparty/dropzone-4.3.0.min.css')
+    script(src='/npmjs/dropzone/dist/dropzone.js', type='text/javascript')
+    script(src='/npmjs/fela/dist/fela.min.js', type='text/javascript')
+    script(src='/npmjs/riot/riot+compiler.min.js', type='text/javascript')
+    script(src='/npmjs/whatwg-fetch/fetch.js', type='text/javascript')
+    link(rel='stylesheet', href='/npmjs/dropzone/dist/dropzone.css')
     link(rel='stylesheet', href='/3rdparty/webfont/source-sans-pro/font.css')
     link(rel='stylesheet', href='/css/main.css')
+    link(rel='stylesheet', id='felaStylesheet')
+
   body
     block content
+    style(id='felaStyles')
     script(src='/js/notification-bar.tag.html', type='riot/tag')
     script(src='/js/status-indicator.tag.html', type='riot/tag')
     script(src='/js/file-status.tag.html', type='riot/tag')
     script(src='/js/app.tag.html', type='riot/tag')
-    script riot.mount('*', { appVersion: '#{appVersion}' })
+    script.
+      'use strict';
+      const felaMixin = {
+        renderer: Fela.createRenderer(),
+        updateStyles: () => { document.getElementById('felaStyles').innerText = felaMixin.renderer.renderToString(); }
+      };
+      riot.mixin({ init: function() { this.opts.felaMixin = felaMixin; }});
+      riot.mount('*', { appVersion: '#{appVersion}' });

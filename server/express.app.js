@@ -20,6 +20,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
+app.use('/npmjs', express.static(path.join(__dirname, 'node_modules')));
+
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

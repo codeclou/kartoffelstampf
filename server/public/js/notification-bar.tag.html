@@ -6,23 +6,41 @@
 
     <!-- HTML -->
     <ul>
-        <li each={ notification, i in opts.notifications } class="notification-bar--error">
+        <li each={ notification, i in opts.notifications } class={ classNameError }>
             <strong>{ notification.message }</strong><br>
             { notification.details }
         </li>
     </ul>
+    <a onclick={ changeFont } if={ opts.notifications.length > 0 }>
+        make font bigger
+    </a>
 
     <!-- JAVASCRIPT -->
     <script>
-        var self = this;
-
-    </script>
-
-    <!-- CSS -->
-    <style scoped>
-        .notification-bar--error{
-            color:red;
+        //
+        // METHODS
+        //
+        styles() {
+            const error = props => ({
+                fontSize: props.size + 'px',
+                color: 'red'
+            });
+            self.classNameError = opts.felaMixin.renderer.renderRule(error, { size: self.size });
+            // lastly
+            opts.felaMixin.updateStyles();
         }
-    </style>
+
+        changeFont() {
+            self.size = 30;
+            self.styles();
+        }
+
+        //
+        // INIT
+        //
+        var self = this;
+        self.styles();
+        self.size = 20;
+    </script>
 
 </notification-bar>
