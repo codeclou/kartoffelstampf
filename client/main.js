@@ -3,6 +3,10 @@ import { createRenderer } from 'fela'
 
 import './riot/app.tag.html'
 
+import './main.css'
+import '../node_modules/dropzone/dist/basic.css'
+import '../node_modules/dropzone/dist/dropzone.css'
+
 
 const felaMixin = {
     renderer: createRenderer(),

@@ -11,7 +11,7 @@
 
     <notification-bar notifications={ notifications }></notification-bar>
 
-    <div class={ css.dropzone } id="dropzonepng"></div>
+    <div class={ 'dropzone ' + css.dropzone } id="dropzonepng"></div>
 
     <div class={ css.files }>
         <file-status files={ items }></file-status>
@@ -20,27 +20,11 @@
     <div class={ css.footer }>
         version { opts.appVersion } - crafted with SAUERKRAUT
     </div>
-    <!--
-    FIXME:
-    body {
-        font-family: 'Source Sans Pro';
-    }
 
-    a {
-        color:#02A300;
-        text-decoration: none;
-        cursor: pointer;
-        user-select: none;
-    }
-
-    a:hover {
-        color:#02A300;
-        text-decoration: underline;
-    }
-    -->
     <!-- JAVASCRIPT -->
     <script>
         import dropzone from 'dropzone';
+        dropzone.autoDiscover = false;
         import './file-status.tag.html'
         import './notification-bar.tag.html'
         import './status-indicator.tag.html'
@@ -125,7 +109,7 @@
             });
 
 
-            var exampleSocket = new WebSocket("ws://localhost:9999");
+            var exampleSocket = new WebSocket("ws://localhost:9999/foo");
             exampleSocket.onopen = function (event) {
                 exampleSocket.send("Here's some text that the server is urgently awaiting!");
             };

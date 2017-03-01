@@ -34,9 +34,11 @@
     "babel-loader": "6.2.10",
     "babel-preset-es2015-riot": "1.1.0",
     "babel-preset-stage-2": "6.22.0",
+    "css-loader": "^0.26.2",
     "html-webpack-plugin": "2.25.0",
     "riot-tag-loader": "1.0.0",
     "shelljs": "^0.7.6",
+    "style-loader": "^0.13.2",
     "webpack": "2.2.1",
     "webpack-dev-middleware": "^1.10.1",
     "webpack-hot-middleware": "^2.17.1"
