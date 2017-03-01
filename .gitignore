@@ -6,3 +6,5 @@ server/*.log
 server/uploads/
 client/node_modules
 client/*.log
+node_modules
+*.log

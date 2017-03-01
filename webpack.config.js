@@ -1,16 +1,18 @@
 const { join, resolve } = require('path');
 const babelrc = require('./babel');
-
-const out = join(__dirname, '../../server/public/build/');
+const path = require('path');
 const exclude = /(node_modules)/;
+const webpack = require('webpack');
 
 module.exports = {
-    entry: {
-        app: './main.js'
-    },
+    entry: [
+        'webpack-hot-middleware/client?reload=true',
+        path.join(__dirname, '/client/main.js')
+    ],
     output: {
-        path: out,
-        filename: 'bundle.js'
+        path: path.join(__dirname, '/server/public/build/'),
+        filename: 'bundle.js',
+        publicPath: '/'
     },
     resolve: {
         extensions: ['.js', '.tag.html'],
@@ -34,5 +36,7 @@ module.exports = {
             },
         ]
     },
-    plugins: [],
+    plugins: [
+        new webpack.HotModuleReplacementPlugin()
+    ],
 };

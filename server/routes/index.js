@@ -20,7 +20,7 @@ const imageCompressionService = new ImageCompressionService();
 //
 // INDEX ROUTE
 //
-const appVersion = require('../package.json').version;
+const appVersion = require('../../package.json').version;
 router.get('/', (req, res, next) => {
   res.render('index', {
     appVersion: appVersion

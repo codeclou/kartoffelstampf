@@ -44,7 +44,9 @@
         import './file-status.tag.html'
         import './notification-bar.tag.html'
         import './status-indicator.tag.html'
-        import engine from 'engine.io';
+        /* import engine from 'engine.io'; */
+
+        console.log('FOO');
 
         const self = this;
         opts.busMixin.subscribe('foo', function(ev) {
@@ -122,12 +124,13 @@
                 myDropzone.removeFile(dropzoneFile);
             });
 
-
+/*
             var socket = new engine.Socket('ws://localhost/');
             socket.on('open', function(){
                 socket.on('message', function(data){});
                 socket.on('close', function(){});
             });
+            */
         }
 
         //

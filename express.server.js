@@ -49,7 +49,7 @@ server.on('error', onError);
 server.on('listening', onListening);
 
 
-
+/*
 const engineServer = engine.attach(server);
 
 engineServer.on('connection', function (socket) {
@@ -57,3 +57,4 @@ engineServer.on('connection', function (socket) {
     socket.on('close', function(){ });
 });
 
+*/

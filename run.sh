@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# will cause exit of whole script if one command inside fails
 set -e
 
 # CLIENT: BUILD bundle.js
