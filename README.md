@@ -119,7 +119,7 @@ git push origin 1.0.0
 **Notices**
 
  * optipng switched to stderr for all output .... hmm
- 
+ * Websockets via https://github.com/websockets/ws
  
  
 ---
