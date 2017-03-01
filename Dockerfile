@@ -20,7 +20,8 @@ RUN echo  >> /etc/apk/repositories && \
     mkdir -p /opt/npm/ && \
     mkdir -p /opt/node/ && \
     mkdir -p /opt/npm/uploads && \
-    mkdir -p /opt/npm/app && \
+    mkdir -p /opt/npm/server && \
+    mkdir -p /opt/npm/client && \
     addgroup -g 10777 nodeworker && \
     adduser -D -G nodeworker -u 10777 nodeworker && \
     chmod u+rx,g+rx,o+rx,a-w /opt/docker-entrypoint.sh && \
@@ -30,8 +31,8 @@ RUN echo  >> /etc/apk/repositories && \
 #
 # INSTALL APP
 #
-COPY server/ /opt/npm/app/
-RUN cd /opt/npm/app/ && \
+COPY server/ /opt/npm/server/
+RUN cd /opt/npm/server/ && \
     npm install
 
 #
@@ -39,7 +40,9 @@ RUN cd /opt/npm/app/ && \
 #
 USER nodeworker
 EXPOSE 9999
+VOLUME ["/opt/npm/server/"]
+VOLUME ["/opt/npm/client/"]
 VOLUME ["/u"]
 ENTRYPOINT ["/opt/docker-entrypoint.sh"]
-WORKDIR /opt/npm/app/
+WORKDIR /opt/npm/server/
 CMD ["npm", "start"]

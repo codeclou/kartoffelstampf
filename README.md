@@ -119,3 +119,19 @@ git push origin 1.0.0
 **Notices**
 
  * optipng switched to stderr for all output .... hmm
+ 
+ 
+ 
+---
+ 
+**Development Run**
+
+```bash
+docker run \
+    -i -t \
+    -p 9999:9999 \
+    -v $(pwd)/server/:/opt/npm/server \
+    -v $(pwd)/client/:/opt/npm/client \
+    codeclou/kartoffelstampf:latest \
+    npm run develop
+```

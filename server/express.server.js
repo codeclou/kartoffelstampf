@@ -7,6 +7,7 @@
 const app = require('./express.app');
 const debug = require('debug')('kartoffelstampf:server');
 const http = require('http');
+const engine = require('engine.io');
 const fs = require('fs');
 
 const onError = (error) => {
@@ -46,4 +47,13 @@ const server = http.createServer(app);
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);
+
+
+
+const engineServer = engine.attach(server);
+
+engineServer.on('connection', function (socket) {
+    socket.on('message', function(data){ });
+    socket.on('close', function(){ });
+});
 

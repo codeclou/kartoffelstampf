@@ -44,6 +44,7 @@
         import './file-status.tag.html'
         import './notification-bar.tag.html'
         import './status-indicator.tag.html'
+        import engine from 'engine.io';
 
         const self = this;
         opts.busMixin.subscribe('foo', function(ev) {
@@ -119,6 +120,13 @@
                 file.status = 'uploaded';
                 self.addFile(file);
                 myDropzone.removeFile(dropzoneFile);
+            });
+
+
+            var socket = new engine.Socket('ws://localhost/');
+            socket.on('open', function(){
+                socket.on('message', function(data){});
+                socket.on('close', function(){});
             });
         }
 
