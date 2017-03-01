@@ -13,7 +13,7 @@
 
 ### Quickstart
 
- * `docker run -i -t -p 9999:9999 codeclou/kartoffelstampf:latest`
+ * `docker run -i -t -p 9999:9999 codeclou/kartoffelstampf:1.1.0`
  * [http://localhost:9999](http://localhost:9999)
 
 
@@ -58,7 +58,7 @@ Start Kartoffelstampf like this.
 docker run \
     -i -t \
     -p 9999:9999 \
-    codeclou/kartoffelstampf:latest
+    codeclou/kartoffelstampf:1.1.0
 ```
 
 Now go to [http://localhost:9999](http://localhost:9999) and start to stampf it. 
