@@ -1,3 +1,7 @@
+/**
+ * Licensed under MIT License
+ * Copyright (c) 2017 Bernhard Grünewaldt
+ */
 import riot from 'riot'
 import { createRenderer } from 'fela'
 
