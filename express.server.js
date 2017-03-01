@@ -62,6 +62,18 @@ wss.on('connection', function connection(ws) {
         console.log(location);
     });
 
-    ws.send('something');
+    ws.send('me is listenin!');
+
+    const spawn = require('child_process').spawn;
+    const dummyCmd = spawn('bash', ['/opt/npm/app/dummy-cmd.sh']);
+    dummyCmd.stdout.on('data', function (data) {
+        ws.send('stdout: ' + data.toString());
+    });
+    dummyCmd.stderr.on('data', function (data) {
+        ws.send('stderr: ' + data.toString());
+    });
+    dummyCmd.on('exit', function (code) {
+        ws.send('child process exited with code ' + code.toString());
+    });
 });
 
