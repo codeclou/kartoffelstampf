@@ -8,6 +8,7 @@ const app = require('./express.app');
 const debug = require('debug')('kartoffelstampf:server');
 const http = require('http');
 const fs = require('fs');
+const path = require('path');
 
 const onError = (error) => {
     if (error.syscall !== 'listen') {
@@ -62,18 +63,31 @@ wss.on('connection', function connection(ws) {
         console.log(location);
     });
 
-    ws.send('me is listenin!');
-
     const spawn = require('child_process').spawn;
-    const dummyCmd = spawn('bash', ['/opt/npm/app/dummy-cmd.sh']);
+    const dummyCmd = spawn('bash', [ path.join(__dirname, 'dummy-cmd.sh') ]);
     dummyCmd.stdout.on('data', function (data) {
-        ws.send('stdout: ' + data.toString());
+        ws.send(JSON.stringify({
+            type: 'stdout',
+            payload: {
+                text: data.toString()
+            }
+        }));
     });
     dummyCmd.stderr.on('data', function (data) {
-        ws.send('stderr: ' + data.toString());
+        ws.send(JSON.stringify({
+            type: 'stderr',
+            payload: {
+                text: data.toString()
+            }
+        }));
     });
     dummyCmd.on('exit', function (code) {
-        ws.send('child process exited with code ' + code.toString());
+        ws.send(JSON.stringify({
+            type: 'processStatus',
+            payload: {
+                exitCode: code.toString(),
+                text: 'child process exited with code ' + code.toString()
+            }
+        }));
     });
 });
-

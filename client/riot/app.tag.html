@@ -11,9 +11,7 @@
 
     <notification-bar notifications={ notifications }></notification-bar>
 
-    <div each={ stdoutSingle in stdoutArray }>
-        <raw content="{ ansiConvert.toHtml(stdoutSingle) }"/>
-    </div>
+    <terminal-output lines={ terminalCommandOutputLines }></terminal-output>
 
     <div class={ 'dropzone ' + css.dropzone } id="dropzonepng"></div>
 
@@ -31,11 +29,10 @@
         import dropzone from 'dropzone';
         dropzone.autoDiscover = false;
         import './file-status.tag.html'
+        import './terminal-output.tag.html';
         import './raw.tag.html'
         import './notification-bar.tag.html'
         import './status-indicator.tag.html'
-        import AnsiToHtml from 'ansi-to-html';
-        self.ansiConvert = new AnsiToHtml();
 
 
         console.log('FOO');
@@ -123,7 +120,7 @@
             };
 
             exampleSocket.onmessage = function (event) {
-                self.stdoutArray.push(event.data);
+                self.terminalCommandOutputLines.push(event.data);
                 self.update();
             };
         }
@@ -172,7 +169,7 @@
         //
         self.items = [];
         self.notifications = [];
-        self.stdoutArray = [];
+        self.terminalCommandOutputLines = [];
         self.styles();
         self.on('mount', onMount);
     </script>

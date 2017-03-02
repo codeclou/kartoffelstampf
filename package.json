@@ -12,8 +12,7 @@
     "watch": "node ./express.server.js"
   },
   "dependencies": {
-    "ansi-to-html": "^0.6.0",
-    "ansi_up": "^1.3.0",
+    "anser": "git+https://github.com/clouless/anser.git#carriageReturn",
     "body-parser": "~1.16.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.0",
