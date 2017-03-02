@@ -6,6 +6,8 @@ RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/ap
 
 RUN echo  >> /etc/apk/repositories && \
     apk add --no-cache \
+            bc \
+            ncurses \
             nodejs \
             bash \
             wget \
