@@ -35,9 +35,11 @@
                 lineObj.json = Anser.ansiToJson(lineObj.payload.text);
                 lineObj.html = Anser.ansiToHtml(lineObj.payload.text);
                 lineObj.clearLine = false;
+                console.log(lineObj.json);
                 if (lineObj.json !== undefined && lineObj.json !== null && lineObj.json.length > 0) {
                     for (let i=0;i<lineObj.json.length;i++) {
                         if (lineObj.json[i].clearLine === true) {
+                            console.log('clear', lineObj.clearLine);
                             lineObj.clearLine = true;
                         }
                     }

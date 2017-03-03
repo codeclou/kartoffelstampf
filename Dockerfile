@@ -34,7 +34,6 @@ RUN echo  >> /etc/apk/repositories && \
 # so that only errors are logged to STDERR
 # and normal output is logged to STDOUT
 #
-COPY optipng-stdout-0.7.6.patch /opt/
 RUN apk add --no-cache --virtual .build-deps \
             libstdc++ \
             binutils-gold \
@@ -47,14 +46,9 @@ RUN apk add --no-cache --virtual .build-deps \
             make \
             git
 RUN mkdir -p /opt/optipng-build/ && \
-    wget -O /opt/optipng-0.7.6.zip https://codeclou.github.io/kartoffelstampf/repo/optipng-0.7.6.zip && \
+    wget -O /opt/optipng-0.7.6.zip https://codeclou.github.io/kartoffelstampf/repo/optipng-0.7.6-patched.zip && \
     unzip /opt/optipng-0.7.6.zip -d /opt/optipng-build/ && \
-    ls -la /opt/optipng-build/ && \
-    find * /opt/optipng-build/ && \
-    cp /opt/optipng-stdout-0.7.6.patch /opt/optipng-build/optipng-0.7.6/src/optipng && \
-    cd /opt/optipng-build/optipng-0.7.6/src/optipng && \
-    git apply optipng-stdout-0.7.6.patch && \
-    cd /opt/optipng-build/optipng-0.7.6  && \
+    cd /opt/optipng-build/optipng-0.7.6/ && \
     ./configure  && \
     make  && \
     make install  && \
