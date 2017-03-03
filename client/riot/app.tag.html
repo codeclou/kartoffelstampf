@@ -11,6 +11,12 @@
 
     <notification-bar notifications={ notifications }></notification-bar>
 
+    <button
+        onclick={ execCommand }
+        disabled={ websocketConnected }
+    >
+        exec command
+    </button>
     <terminal-output lines={ terminalCommandOutputLines }></terminal-output>
 
     <div class={ 'dropzone ' + css.dropzone } id="dropzonepng"></div>
@@ -83,6 +89,16 @@
                 .catch(fetchAddErrorToNotificationBar);
         }
 
+        self.execCommand = () => {
+            self.webSocket.send(JSON.stringify({
+                command: 'optipng',
+                commandArguments: [
+                    '-o5',
+                    '/opt/npm/app/test/i-can-has-compress.png'
+                ]
+            }));
+        };
+
         const onMount = () => {
             opts.busMixin.publish('foo', { bar: 'foo' });
 
@@ -114,18 +130,12 @@
             });
 
 
-            var exampleSocket = new WebSocket("ws://localhost:9999/foo");
-            exampleSocket.onopen = function (event) {
-                exampleSocket.send(JSON.stringify({
-                    command: 'optipng',
-                    commandArguments: [
-                        '-o5',
-                        '/opt/npm/app/test/i-can-has-compress.png'
-                    ]
-                }));
-            };
+            self.webSocket = new WebSocket("ws://localhost:9999/foo");
+            self.webSocket.onopen = function (event) {
+                self.websocketConnected = true;
 
-            exampleSocket.onmessage = function (event) {
+            };
+            self.webSocket.onmessage = function (event) {
                 self.terminalCommandOutputLines.push(event.data);
                 self.update();
             };
@@ -173,6 +183,7 @@
         //
         // INIT
         //
+        self.websocketConnected = false;
         self.items = [];
         self.notifications = [];
         self.terminalCommandOutputLines = [];
