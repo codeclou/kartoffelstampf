@@ -9,7 +9,8 @@ docker run \
     -i -t \
     -p 9999:9999 \
     -v $(pwd)/:/opt/npm/app/ \
-    codeclou/kartoffelstampf:latest \
+    karteoffelstampf-local \
     npm run watch
 
+#codeclou/kartoffelstampf:latest
 #karteoffelstampf-local \

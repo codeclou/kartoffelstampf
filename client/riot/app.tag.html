@@ -116,7 +116,13 @@
 
             var exampleSocket = new WebSocket("ws://localhost:9999/foo");
             exampleSocket.onopen = function (event) {
-                exampleSocket.send("Here's some text that the server is urgently awaiting!");
+                exampleSocket.send(JSON.stringify({
+                    command: 'optipng',
+                    commandArguments: [
+                        '-o5',
+                        '/opt/npm/app/test/i-can-has-compress.png'
+                    ]
+                }));
             };
 
             exampleSocket.onmessage = function (event) {
