@@ -48,29 +48,41 @@ class WebSocketCommandService {
         //const cmd = spawn('bash', [ path.join(__dirname, 'dummy-cmd.sh') ]);
         const cmd = spawn(commandInstruction.command, commandInstruction.commandArguments);
         cmd.stdout.on('data', function (data) {
-            ws.send(JSON.stringify({
-                type: 'stdout',
-                payload: {
-                    text: data.toString()
-                }
-            }));
+            try {
+                ws.send(JSON.stringify({
+                    type: 'stdout',
+                    payload: {
+                        text: data.toString()
+                    }
+                }));
+            } catch (error) {
+                console.log('faield to send ws', error)
+            }
         });
         cmd.stderr.on('data', function (data) {
-            ws.send(JSON.stringify({
-                type: 'stderr',
-                payload: {
-                    text: data.toString()
-                }
-            }));
-        });
+            try {
+                ws.send(JSON.stringify({
+                    type: 'stderr',
+                    payload: {
+                        text: data.toString()
+                    }
+                }));
+            } catch (error) {
+                console.log('faield to send ws', error)
+            }
+            });
         cmd.on('exit', function (code) {
-            ws.send(JSON.stringify({
-                type: 'processStatus',
-                payload: {
-                    exitCode: code.toString(),
-                    text: 'child process exited with code ' + code.toString()
-                }
-            }));
+            try {
+                ws.send(JSON.stringify({
+                    type: 'processStatus',
+                    payload: {
+                        exitCode: code.toString(),
+                        text: 'child process exited with code ' + code.toString()
+                    }
+                }));
+            } catch (error) {
+                console.log('faield to send ws', error)
+            }
         });
     }
 }
