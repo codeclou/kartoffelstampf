@@ -18,6 +18,23 @@
 
  * Resizing PNG+JPG with [ImageMagick](https://de.wikipedia.org/wiki/ImageMagick)
 
+**Lossy Compression with guetzli**
+
+ * https://github.com/google/guetzli
+ * Because of [Issue 40](https://github.com/google/guetzli/issues/40) guetzli gets confused by some Camera JPG files. The workaround mentioned is to convert to png with imagemagick and then pass to guetzli.
+
+```sh
+wget -O hires.jpg https://codeclou.github.io/kartoffelstampf/test-images/test-affinity-photo-600dpi.jpg
+convert hires.jpg hires.png
+guetzli hires.png hires_comp.jpg
+```
+
+ * !bangbang! guetzli consumes a lot of RAM. Currently when giving 8GB to Docker Process it is not enought to compress a 4MB 600dpi testfile.
+  * Ram Consumption monitored with [cadvisor](https://github.com/google/cadvisor)
+  * Result: ![](https://codeclou.github.io/kartoffelstampf/img/guetzli-ram-8gb-killed.png)
+  
+ 
+
 **SVG Compression**
 
  * Clean SVG without Comments with [scour](https://github.com/scour-project/scour)
