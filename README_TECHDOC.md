@@ -25,8 +25,17 @@
 
 ```sh
 wget -O hires.jpg https://codeclou.github.io/kartoffelstampf/test-images/test-affinity-photo-600dpi.jpg
-convert hires.jpg hires.png
+# 69MPix ~ 20GB Ram
+
 guetzli hires.png hires_comp.jpg
+
+#------
+
+wget -O hires2.jpg https://codeclou.github.io/kartoffelstampf/test-images/test-sony-alpha-6000-hires.JPG
+# 24MPix ~ 7GB Ram
+
+convert hires2.jpg hires2.png
+guetzli --quality 84 --verbose hires2.png hires2_comp.jpg
 ```
 
  * :bangbang: guetzli consumes a lot of RAM. 
@@ -35,7 +44,7 @@ guetzli hires.png hires_comp.jpg
     * via exiftool: `exiftool -Megapixels hires.jpg -T` (only working if metadata is present!)
     * via imagemagick: `identify hires.jpg`
      * `hires.jpg JPEG 8333x8333 8333x8333+0+0 8-bit sRGB 4.04MB 0.000u 0:00.000`
-     * Now we do `8333 x 83333 / 1000000` = 69MPix
+     * Now we do `8333 x 8333 / 1000000` = 69MPix
   * (2) check how much ram is available
   * (3) calculate if it is within ram capacity to start conversion
    * `69 MPix * 300MB/MPix / 1024 = 20 GB`  
