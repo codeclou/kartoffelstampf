@@ -54,7 +54,35 @@ RUN mkdir -p /opt/optipng-build/ && \
     make install  && \
     rm -rf /opt/optipng-build/
 
-#apk del .build-deps && \
+
+
+#
+# GLFAGS https://github.com/gflags/gflags
+#
+RUN apk add --no-cache --virtual .build-deps-gflags cmake && \
+    mkdir -p /opt/build/gflags/gflags-2.2.0 && \
+    wget -O /opt/build/gflags/gflags-2.2.0.zip https://codeclou.github.io/kartoffelstampf/repo/gflags-2.2.0-pre-configured-cmake.zip && \
+    unzip /opt/build/gflags/gflags-2.2.0.zip -d /opt/build/gflags/gflags-2.2.0 && \
+    cd /opt/build/gflags/gflags-2.2.0 && \
+    # NOTE: we already did CMAKE manually and zipped the result
+    #       also did we manually download the git-submodule dir /doc and inject it in our zip
+    make && \
+    make install && \
+    rm -rf /opt/build/gflags/
+
+#
+# GUETZLI https://github.com/google/guetzli
+#
+# @DependsOn GFLAGS
+#
+RUN apk add --no-cache --virtual .build-deps-guetzli libpng libpng-dev && \
+    mkdir -p /opt/build/guetzli/guetzli-1.0 && \
+    wget -O //opt/build/guetzli/guetzli-1.0.zip https://github.com/google/guetzli/archive/v1.0.zip && \
+    unzip /opt/build/guetzli/guetzli-1.0.zip -d /opt/build/guetzli/guetzli-1.0 && \
+    cd /opt/build/guetzli/guetzli-1.0/guetzli-1.0 && \
+    make && \
+    mv /opt/build/guetzli/guetzli-1.0/guetzli-1.0/bin/Release/guetzli /usr/local/bin && \
+    rm -rf /opt/build/guetzli/
 
 #
 # INSTALL APP
