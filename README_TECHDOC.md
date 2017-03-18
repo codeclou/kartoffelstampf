@@ -29,9 +29,10 @@ convert hires.jpg hires.png
 guetzli hires.png hires_comp.jpg
 ```
 
- * !bangbang! guetzli consumes a lot of RAM. Currently when giving 8GB to Docker Process it is not enought to compress a 4MB 600dpi testfile.
+ * :bangbang: guetzli consumes a lot of RAM. Currently when giving 8GB to Docker Process it is not enought to compress a 4MB 600dpi testfile.
   * Ram Consumption monitored with [cadvisor](https://github.com/google/cadvisor)
   * Result: ![](https://codeclou.github.io/kartoffelstampf/img/guetzli-ram-8gb-killed.png)
+  * Also when given 12GB to Docker Process it is not enough!
   
  
 
