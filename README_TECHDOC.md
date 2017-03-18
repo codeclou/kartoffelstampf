@@ -29,11 +29,16 @@ convert hires.jpg hires.png
 guetzli hires.png hires_comp.jpg
 ```
 
- * :bangbang: guetzli consumes a lot of RAM. Currently when giving 8GB to Docker Process it is not enought to compress a 4MB 600dpi testfile.
-  * Ram Consumption monitored with [cadvisor](https://github.com/google/cadvisor)
-  * Result: ![](https://codeclou.github.io/kartoffelstampf/img/guetzli-ram-8gb-killed.png)
-  * Also when given 12GB to Docker Process it is not enough!
-  
+ * :bangbang: guetzli consumes a lot of RAM. 
+ * 1 MPix equals 300 MB of ram. So we need to do the following before startign a conversion:
+  * (1) determine MPix of img 
+    * via exiftool: `exiftool -Megapixels hires.jpg -T` (only working if metadata is present!)
+    * via imagemagick: `identify hires.jpg`
+     * `hires.jpg JPEG 8333x8333 8333x8333+0+0 8-bit sRGB 4.04MB 0.000u 0:00.000`
+     * Now we do `8333 x 83333 / 1000000` = 69MPix
+  * (2) check how much ram is available
+  * (3) calculate if it is within ram capacity to start conversion
+   * `69 MPix * 300MB/MPix / 1024 = 20 GB`  
  
 
 **SVG Compression**
