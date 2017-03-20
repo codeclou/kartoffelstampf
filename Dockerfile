@@ -77,7 +77,7 @@ RUN apk add --no-cache --virtual .build-deps-gflags cmake && \
 #
 RUN apk add --no-cache --virtual .build-deps-guetzli libpng libpng-dev && \
     mkdir -p /opt/build/guetzli/guetzli-1.0 && \
-    wget -O //opt/build/guetzli/guetzli-1.0.zip https://github.com/google/guetzli/archive/v1.0.zip && \
+    wget -O /opt/build/guetzli/guetzli-1.0.zip https://github.com/google/guetzli/archive/v1.0.zip && \
     unzip /opt/build/guetzli/guetzli-1.0.zip -d /opt/build/guetzli/guetzli-1.0 && \
     cd /opt/build/guetzli/guetzli-1.0/guetzli-1.0 && \
     make && \
@@ -90,6 +90,15 @@ RUN apk add --no-cache --virtual .build-deps-guetzli libpng libpng-dev && \
 COPY ./ /opt/npm/app/
 RUN cd /opt/npm/app/ && \
     npm install
+
+
+#
+# INSTALL KARTOFFELSTAMP-SERVER
+#
+ENV KARTOFFELSTAMPF_SERVER_VERSION 0.0.2
+RUN wget -O /opt/kartoffelstampf-server.zip https://github.com/codeclou/kartoffelstampf-server/releases/download/${KARTOFFELSTAMPF_SERVER_VERSION}/dist.zip
+# FIXME: Install
+#RUN npm prune --production # delete devDependencies
 
 #
 # WORKDIR
