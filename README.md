@@ -3,7 +3,7 @@
 
 &nbsp;
 
-> Compress, Squash and Stampf your Images in a convenient way.
+> Compress, Squash and Stampf your Images in a convenient way. Out-of-the-Box Docker Image with Web-GUI to perform lossless PNG and JPG compression.
 
 [![](https://codeclou.github.io/doc/badges/generated/docker-image-size-150.svg)](https://hub.docker.com/r/codeclou/kartoffelstampf/tags/) [![](https://codeclou.github.io/doc/badges/generated/docker-from-alpine-3.8.svg)](https://alpinelinux.org/) [![](https://codeclou.github.io/doc/badges/generated/docker-run-as-non-root.svg)](https://docs.docker.com/engine/reference/builder/#/user)
 
