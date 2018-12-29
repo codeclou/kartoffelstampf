@@ -14,7 +14,7 @@
 ### Quickstart
 
  * Run in Terminal
-   * `docker run -i -t -p 9999:9999 codeclou/kartoffelstampf:2.0.0`
+   * `docker run -i -t -p 9999:9999 codeclou/kartoffelstampf:2.1.0`
  * Open in browser
    * [http://localhost:9999](http://localhost:9999)
 
