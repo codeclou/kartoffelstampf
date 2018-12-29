@@ -13,8 +13,10 @@
 
 ### Quickstart
 
- * `docker run -i -t -p 9999:9999 codeclou/kartoffelstampf:1.1.0`
- * [http://localhost:9999](http://localhost:9999)
+ * Run in Terminal
+   * `docker run -i -t -p 9999:9999 codeclou/kartoffelstampf:2.0.0`
+ * Open in browser
+   * [http://localhost:9999](http://localhost:9999)
 
 
 -----
@@ -23,7 +25,7 @@
 
 ### Preview
 
-[![](https://codeclou.github.io/kartoffelstampf/img/demo.gif)](https://github.com/codeclou/kartoffelstampf/)
+[![](https://codeclou.github.io/kartoffelstampf/img/demo.gif?v2)](https://github.com/codeclou/kartoffelstampf/)
 
 
 -----
@@ -46,26 +48,6 @@
 
 -----
 
-&nbsp;
-
-
-### Usage
-
-
-Start Kartoffelstampf like this.
-
-```bash
-docker run \
-    -i -t \
-    -p 9999:9999 \
-    codeclou/kartoffelstampf:1.1.0
-```
-
-Now go to [http://localhost:9999](http://localhost:9999) and start to stampf it.
-
-
-
------
 
 &nbsp;
 
