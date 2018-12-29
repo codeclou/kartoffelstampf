@@ -87,8 +87,8 @@ RUN apk add --no-cache --virtual .build-deps-guetzli libpng libpng-dev && \
 # INSTALL KARTOFFELSTAMP-SERVER AND CLIENT
 #
 USER nodeworker
-ENV KARTOFFELSTAMPF_SERVER_VERSION v0.1.0
-ENV KARTOFFELSTAMPF_CLIENT_VERSION v0.1.1
+ENV KARTOFFELSTAMPF_SERVER_VERSION v2.0.0
+ENV KARTOFFELSTAMPF_CLIENT_VERSION v2.0.0
 RUN wget -O /opt/npm/kartoffelstampf-server.zip https://github.com/codeclou/kartoffelstampf-server/releases/download/${KARTOFFELSTAMPF_SERVER_VERSION}/dist.zip && \
     unzip /opt/npm/kartoffelstampf-server.zip -d /opt/npm/app/ && \
     rm -f /opt/npm/kartoffelstampf-server.zip  && \

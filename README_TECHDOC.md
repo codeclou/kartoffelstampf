@@ -17,7 +17,6 @@ http://localhost:9999/
 ### TechDoc
 
 
-
 **Exif-Data Operations**
 
  * Autorotate JPEG based on exif-data with [exiftran](http://manpages.ubuntu.com/manpages/zesty/man1/exiftran.1.html)
@@ -75,39 +74,16 @@ guetzli --quality 84 --verbose hires2.png hires2_comp.jpg
 
 ----
 
-**Releasing and Tagging**
 
-Keep `server/package.json` version in sync. And do:
-
-```
-git tag -a 1.0.0 -m "rel 1.0.0"
-git push origin 1.0.0
-```
-
-----
-
-**Notices**
-
- * optipng switched to stderr for all output .... hmm
- * Websockets via https://github.com/websockets/ws
-
-
----
-
-**Development Run**
-
-```bash
-bash runWatch.sh
-```
 
 ---
 
 TODO
 
- * Display results of Commandline-Executions
-  * Support `ncurses` and other progress-bar thingy stuff.
-  * Support ANSI Colors
-  * Use Websockets to output line-wise instantly
+ * ~Display results of Commandline-Executions~
+  * ~Support `ncurses` and other progress-bar thingy stuff.~
+  * ~Support ANSI Colors~
+  * ~Use Websockets to output line-wise instantly~
  * Introduce Batches with unique IDs
  * Make whole batches downloadable as ZIP
  * Introduce 'create simple webgallery' which generates thumbs, offline index.html and compresses images lossy to websize around 300-500KB
