@@ -5,10 +5,10 @@
 
 > Compress, Squash and Stampf your Images in a convenient way.
 
-[![](https://codeclou.github.io/doc/badges/generated/docker-image-size-150.svg)](https://hub.docker.com/r/codeclou/kartoffelstampf/tags/) [![](https://codeclou.github.io/doc/badges/generated/docker-from-alpine-3.5.svg)](https://alpinelinux.org/) [![](https://codeclou.github.io/doc/badges/generated/docker-run-as-non-root.svg)](https://docs.docker.com/engine/reference/builder/#/user)
+[![](https://codeclou.github.io/doc/badges/generated/docker-image-size-150.svg)](https://hub.docker.com/r/codeclou/kartoffelstampf/tags/) [![](https://codeclou.github.io/doc/badges/generated/docker-from-alpine-3.8.svg)](https://alpinelinux.org/) [![](https://codeclou.github.io/doc/badges/generated/docker-run-as-non-root.svg)](https://docs.docker.com/engine/reference/builder/#/user)
 
 -----
- 
+
 &nbsp;
 
 ### Quickstart
@@ -32,7 +32,7 @@
 
 ### Features
 
- * Lossless PNG Compression powered by [pngquant](https://pngquant.org/) and [optipng](https://de.wikipedia.org/wiki/OptiPNG)
+ * Lossless PNG Compression powered by [optipng](https://de.wikipedia.org/wiki/OptiPNG)
  * Lossless JPG compression powered by [jpegoptim](https://github.com/tjko/jpegoptim)
 
 -----
@@ -61,7 +61,7 @@ docker run \
     codeclou/kartoffelstampf:1.1.0
 ```
 
-Now go to [http://localhost:9999](http://localhost:9999) and start to stampf it. 
+Now go to [http://localhost:9999](http://localhost:9999) and start to stampf it.
 
 
 
@@ -69,10 +69,9 @@ Now go to [http://localhost:9999](http://localhost:9999) and start to stampf it.
 
 &nbsp;
 
-### License, Liability & Support
+### License
 
- * [![](https://codeclou.github.io/doc/docker-warranty-notice.svg?v1)](https://github.com/codeclou/kartoffelstampf/blob/master/LICENSE.md)
- * Dockerfile and Image is provided under [MIT License](https://github.com/codeclou/kartoffelstampf/blob/master/LICENSE.md)
+Dockerfile and Image is provided under [MIT License](https://github.com/codeclou/kartoffelstampf/blob/master/LICENSE.md)
 
 -----
 
@@ -81,4 +80,3 @@ Now go to [http://localhost:9999](http://localhost:9999) and start to stampf it.
 ### Appendix
 
  * [Technical Documentation](./README_TECHDOC.md)
-  

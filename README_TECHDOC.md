@@ -1,9 +1,28 @@
+### Build Locally
+
+
+```
+docker build . -t kartoffelstampf-local
+
+docker run \
+    -i -t \
+    -p 9999:9999 \
+    kartoffelstampf-local
+```
+
+http://localhost:9999/
+
+&nbsp;
+
+### TechDoc
+
+
 
 **Exif-Data Operations**
 
  * Autorotate JPEG based on exif-data with [exiftran](http://manpages.ubuntu.com/manpages/zesty/man1/exiftran.1.html)
   * `exiftran -ai foo.jpg`
- * Remove all exif-data  
+ * Remove all exif-data
   * `exiftran -di foo.jpg`
 
 **Lossless Compression**
@@ -38,17 +57,17 @@ convert hires2.jpg hires2.png
 guetzli --quality 84 --verbose hires2.png hires2_comp.jpg
 ```
 
- * :bangbang: guetzli consumes a lot of RAM. 
+ * :bangbang: guetzli consumes a lot of RAM.
  * 1 MPix equals 300 MB of ram. So we need to do the following before startign a conversion:
-  * (1) determine MPix of img 
+  * (1) determine MPix of img
     * via exiftool: `exiftool -Megapixels hires.jpg -T` (only working if metadata is present!)
     * via imagemagick: `identify hires.jpg`
      * `hires.jpg JPEG 8333x8333 8333x8333+0+0 8-bit sRGB 4.04MB 0.000u 0:00.000`
      * Now we do `8333 x 8333 / 1000000` = 69MPix
   * (2) check how much ram is available
   * (3) calculate if it is within ram capacity to start conversion
-   * `69 MPix * 300MB/MPix / 1024 = 20 GB`  
- 
+   * `69 MPix * 300MB/MPix / 1024 = 20 GB`
+
 
 **SVG Compression**
 
@@ -71,10 +90,10 @@ git push origin 1.0.0
 
  * optipng switched to stderr for all output .... hmm
  * Websockets via https://github.com/websockets/ws
- 
- 
+
+
 ---
- 
+
 **Development Run**
 
 ```bash
@@ -88,7 +107,7 @@ TODO
  * Display results of Commandline-Executions
   * Support `ncurses` and other progress-bar thingy stuff.
   * Support ANSI Colors
-  * Use Websockets to output line-wise instantly 
+  * Use Websockets to output line-wise instantly
  * Introduce Batches with unique IDs
  * Make whole batches downloadable as ZIP
  * Introduce 'create simple webgallery' which generates thumbs, offline index.html and compresses images lossy to websize around 300-500KB

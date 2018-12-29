@@ -1,4 +1,4 @@
-FROM alpine:3.5
+FROM node:11.6.0-alpine
 
 COPY docker-entrypoint.sh /opt/docker-entrypoint.sh
 
@@ -6,7 +6,6 @@ RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/ap
 
 RUN echo  >> /etc/apk/repositories && \
     apk add --no-cache \
-            nodejs \
             bash \
             wget \
             gzip \
@@ -85,28 +84,28 @@ RUN apk add --no-cache --virtual .build-deps-guetzli libpng libpng-dev && \
     rm -rf /opt/build/guetzli/
 
 #
-# INSTALL APP
-#
-COPY ./ /opt/npm/app/
-RUN cd /opt/npm/app/ && \
-    npm install
-
-
-#
-# INSTALL KARTOFFELSTAMP-SERVER
-#
-ENV KARTOFFELSTAMPF_SERVER_VERSION 0.0.2
-RUN wget -O /opt/kartoffelstampf-server.zip https://github.com/codeclou/kartoffelstampf-server/releases/download/${KARTOFFELSTAMPF_SERVER_VERSION}/dist.zip
-# FIXME: Install
-#RUN npm prune --production # delete devDependencies
-
-#
-# WORKDIR
+# INSTALL KARTOFFELSTAMP-SERVER AND CLIENT
 #
 USER nodeworker
+ENV KARTOFFELSTAMPF_SERVER_VERSION v0.1.0
+ENV KARTOFFELSTAMPF_CLIENT_VERSION v0.1.1
+RUN wget -O /opt/npm/kartoffelstampf-server.zip https://github.com/codeclou/kartoffelstampf-server/releases/download/${KARTOFFELSTAMPF_SERVER_VERSION}/dist.zip && \
+    unzip /opt/npm/kartoffelstampf-server.zip -d /opt/npm/app/ && \
+    rm -f /opt/npm/kartoffelstampf-server.zip  && \
+    ls -lah /opt/npm/app/ && \
+    mkdir /opt/npm/public/ && \
+    wget -O /opt/npm/kartoffelstampf-client.zip https://github.com/codeclou/kartoffelstampf-client/releases/download/${KARTOFFELSTAMPF_CLIENT_VERSION}/dist.zip && \
+    unzip /opt/npm/kartoffelstampf-client.zip -d /opt/npm/public/ && \
+    rm -f /opt/npm/kartoffelstampf-client.zip  && \
+    ls -lah /opt/npm/public/ && \
+    cd /opt/npm/app/ && npm install && npm prune --production
+
+#
+# RUN
+#
 EXPOSE 9999
 VOLUME ["/opt/npm/app/"]
 VOLUME ["/u"]
-ENTRYPOINT ["/opt/docker-entrypoint.sh"]
 WORKDIR /opt/npm/app/
-CMD ["npm", "start"]
+ENTRYPOINT ["/opt/docker-entrypoint.sh"]
+CMD ["npm", "run", "start:prod"]
