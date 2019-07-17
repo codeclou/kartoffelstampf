@@ -1,4 +1,6 @@
-[![](https://codeclou.github.io/kartoffelstampf/img/kartoffelstampf.svg)](https://github.com/codeclou/kartoffelstampf/)
+# Kartoffelstampf
+
+[![](https://codeclou.github.io/kartoffelstampf/img/github-product-logo-kartoffelstampf.png)](https://github.com/codeclou/kartoffelstampf/)
 
 
 &nbsp;
