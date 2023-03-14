@@ -1,3 +1,7 @@
+:mega: **End of Lifetime Notice**: We no longer provide support for this repository. It will be made readonly, you can still fork it and adapt it to your needs.
+
+----
+
 # Kartoffelstampf
 
 > Compress, Squash and Stampf your Images in a convenient way. Out-of-the-Box Docker Image with Web-GUI to perform lossless PNG and JPG compression.
